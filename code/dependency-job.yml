@@ -1,0 +1,31 @@
+stages:
+  - build
+  - test
+  - deploy
+
+# Build Job
+build_job:
+  stage: build
+  script:
+    - echo "Building the application..."
+    - echo "Build complete" > build_output.txt
+  artifacts:
+    paths:
+      - build_output.txt # Speichere die Datei als Artefakt für den nächsten Job
+
+# Test Job (abhängig vom Build Job)
+test_job:
+  stage: test
+  needs:
+    - build_job # Dieser Job benötigt den build_job
+  script:
+    - echo "Running tests on the build..."
+    - cat build_output.txt # Verwende die Datei aus dem Build Job
+
+# Deploy Job (abhängig vom Test Job)
+deploy_job:
+  stage: deploy
+  needs:
+    - test_job # Dieser Job benötigt den test_job
+  script:
+    - echo "Deploying application..."
