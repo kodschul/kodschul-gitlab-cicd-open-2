@@ -1,0 +1,27 @@
+image: python:3.9
+
+# run only on main branch
+# workflow:
+#   rules:
+#     - if: $CI_COMMIT_BRANCH == "main"
+
+services:
+  - mongo:latest
+variables:
+  MONGO_DB: test_db
+  MONGO_HOST: mongo
+  MONGO_PORT: 27017
+
+before_script:
+  - pip install -r db_app/requirements.txt
+
+stages:
+  - test
+
+test_job:
+  stage: test
+  script:
+    - cd db_app && python -m unittest discover
+
+  tags:
+    - custom # Match the tags assigned to the runner

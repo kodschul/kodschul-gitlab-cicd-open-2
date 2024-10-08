@@ -1,0 +1,17 @@
+stages:
+  - test
+  # - deploy
+
+test:
+  stage: test
+  image: python:3.9-alpine
+  script:
+    - sleep 1000
+  tags:
+    - ct-docker-linux
+# deploy:
+#   stage: deploy
+#   script:
+#     - echo "Hello World" > hello.txt
+#   tags:
+#     - ct-win

@@ -1,0 +1,14 @@
+image: busybox
+
+stages:
+  - test
+
+test_job:
+  stage: test
+  script:
+    - echo "Run tests"
+  rules:
+    - when: always
+    - changes:
+        - README.md
+      when: never

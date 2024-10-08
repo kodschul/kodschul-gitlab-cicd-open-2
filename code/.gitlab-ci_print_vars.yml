@@ -1,0 +1,27 @@
+image: busybox
+
+stages:
+  - run
+
+run_job:
+  stage: run
+  script:
+    - echo "Project Name $CI_PROJECT_NAME"
+    - echo "Project Path $CI_PROJECT_PATH"
+    - echo "Project URL $CI_PROJECT_URL"
+    - echo "Commit SHA $CI_COMMIT_SHA"
+    - echo "Commit Branch $CI_COMMIT_BRANCH"
+    - echo "Pipeline ID $CI_PIPELINE_ID"
+    - echo "Pipeline URL $CI_PIPELINE_URL"
+    - echo "Job ID $CI_JOB_ID"
+    - echo "Job Name $CI_JOB_NAME"
+    - echo "Environment Name $CI_ENVIRONMENT_NAME"
+    - echo "Environment URL $CI_ENVIRONMENT_URL"
+    - echo "Runner ID $CI_RUNNER_ID"
+    - echo "Runner Description $CI_RUNNER_DESCRIPTION"
+    - echo "GitLab Instance URL $CI_SERVER_URL"
+    - echo "GitLab User ID $GITLAB_USER_ID"
+    - echo "GitLab User Name $GITLAB_USER_NAME"
+    - echo "GitLab CI Job Token $CI_JOB_TOKEN"
+    - echo "CI Configuration Path $CI_CONFIG_PATH"
+    - echo "CI Pipeline Source $CI_PIPELINE_SOURCE"

@@ -1,0 +1,50 @@
+image: busybox:latest
+
+stages:
+  - prepare
+  - cook
+  - taste
+
+prepare_ingredients:
+  stage: prepare
+  script:
+    - echo "Preparing ingredients in BusyBox..."
+
+prepare_tools:
+  stage: prepare
+  script:
+    - echo "Preparing cooking tools in BusyBox..."
+
+  needs:
+    - prepare_ingredients
+
+cook_dish1:
+  stage: cook
+  script:
+    - echo "Cooking dish 1 in BusyBox..."
+
+  needs:
+    - prepare_tools
+
+cook_dish2:
+  stage: cook
+  script:
+    - echo "Cooking dish 2 in BusyBox..."
+
+  needs:
+    - cook_dish1
+
+taste_dish1:
+  stage: taste
+  script:
+    - echo "Tasting dish 1 in BusyBox..."
+
+  needs:
+    - cook_dish2
+
+taste_dish2:
+  stage: taste
+  script:
+    - echo "Tasting dish 2 in BusyBox..."
+  needs:
+    - taste_dish1

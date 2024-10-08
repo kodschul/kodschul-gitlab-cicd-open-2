@@ -1,0 +1,14 @@
+image: busybox
+
+stages:
+  - run
+
+run_job:
+  stage: run
+  script:
+    - echo "Hello World" > hello.txt
+
+  artifacts:
+    paths:
+      - hello.txt
+    expire_in: "7 days"

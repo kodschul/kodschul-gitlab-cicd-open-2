@@ -1,0 +1,9 @@
+image: python:3.9
+
+stages:
+  - test
+
+test_job:
+  stage: test
+  script:
+    - cd calc && python -m unittest discover

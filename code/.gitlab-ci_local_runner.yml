@@ -1,0 +1,10 @@
+stages:
+  - hello
+
+hello:
+  stage: hello
+  script:
+    - echo "Hello World" > hello.txt
+
+  tags:
+    - ct-win

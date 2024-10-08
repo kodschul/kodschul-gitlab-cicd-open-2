@@ -1,0 +1,30 @@
+image: python:3.9
+
+stages:
+  - test
+  - deploy
+
+test_job:
+  stage: test
+  before_script:
+    - pip install -r calc/requirements.txt
+
+  script:
+    - cd calc &&  pytest --cov=. --junitxml=report.xml --cov-report=xml --cov-report=term-missing
+
+  coverage: '/TOTAL\s+\d+\s+\d+\s+(\d+)%/'
+
+  artifacts:
+    reports:
+      junit: calc/report.xml
+
+      coverage_report:
+        coverage_format: cobertura
+        path: calc/coverage.xml
+    expire_in: "30 days"
+
+deploy_job:
+  stage: deploy
+  script:
+    - echo "Production ready ✔"
+  when: manual

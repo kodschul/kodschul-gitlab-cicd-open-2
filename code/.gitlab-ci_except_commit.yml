@@ -1,0 +1,12 @@
+image: busybox
+
+stages:
+  - test
+
+test_job:
+  stage: test
+  script:
+    - echo "Run tests"
+  except:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /^skip-ci/
