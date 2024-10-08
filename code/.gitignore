@@ -1,0 +1,4 @@
+__pycache__
+.coverage
+report.xml
+coverage.xml

@@ -1,21 +1,21 @@
-stages:
-  # - test
-  - build
+include:
+  - local: python.gitlab-ci.yml
 
-# test:
-#   stage: test
-#   image: python:3.9-alpine
-#   script:
-#     - cd calc && python -m unittest discover
-#   tags:
-#     - ct-docker-linux
+stages:
+  - build
+  - deploy
 
 build:
+  extends: .local_runner
   stage: build
-  image: docker:latest
-  services:
-    - docker:dind
   script:
-    - docker build -t calc-app:v1.0.0 .
-  tags:
-    - ct-docker-linux
+    - echo "CoolApp v1.0.0" > version.info
+  artifacts:
+    paths:
+      - version.info
+
+deploy:
+  extends: .local_runner
+  stage: deploy
+  script:
+    - cat ./version.info

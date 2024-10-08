@@ -1,0 +1,24 @@
+stages:
+  - test
+
+services:
+  - name: mcr.microsoft.com/mssql/server:latest
+    alias: sqlserver
+variables:
+  MSSQL_SA_PASSWORD: "MyAdmin@Password"
+  ACCEPT_EULA: Y
+  MSSQL_DB: test_db
+  MSSQL_HOST: "sqlserver"
+  MSSQL_PORT: 1433
+
+test:
+  stage: test
+  image: python:3.9
+  before_script:
+    - apt-get update && apt-get install -y unixodbc-dev msodbcsql17
+    - pip install -r db_app/requirements.txt
+  script:
+    - cd db_app && python mssql_test.py
+
+  tags:
+    - ct-docker-linux

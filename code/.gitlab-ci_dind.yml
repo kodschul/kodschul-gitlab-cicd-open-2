@@ -1,0 +1,21 @@
+stages:
+  # - test
+  - build
+
+# test:
+#   stage: test
+#   image: python:3.9-alpine
+#   script:
+#     - cd calc && python -m unittest discover
+#   tags:
+#     - ct-docker-linux
+
+build:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
+  script:
+    - docker build -t calc-app:v1.0.0 .
+  tags:
+    - ct-docker-linux

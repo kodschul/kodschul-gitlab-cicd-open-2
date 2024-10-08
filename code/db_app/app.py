@@ -6,6 +6,7 @@ def connect_and_test_db():
     try:
         # Connection settings from environment variables
         mongo_host = os.getenv("MONGO_HOST", "localhost")
+        print(f"mongo_host: {mongo_host}")
         mongo_port = int(os.getenv("MONGO_PORT", 27017))
         mongo_db = os.getenv("MONGO_DB", "test_db")
 
